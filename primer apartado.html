@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primer Apartado</title>
+  <style>
+    body {
+      background-color: pink; 
+      color: purple; 
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+      text-align: justify;
+    }
+
+    h1 {
+      font-size: 24px;
+      line-height: 1.6;
+    }
+
+    .imagen-circular {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;         
+      border: 5px solid blue;     
+      object-fit: cover;          
+    }
+
+    .izquierda {
+      float: left;
+      margin-right: 20px;
+    }
+
+    .derecha {
+      float: right;
+      margin-left: 20px;
+    }
+
+    .clearfix::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: purple;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: darkmagenta;
+    }
+  </style>
+</head>
+<body>
+  <h1>¿QUE ES LA BASURA ELECTRONICA?</h1>
+  <div class="clearfix">
+    <img src="cona3.jpeg" alt="Basura Electronica" class="imagen-circular izquierda">
+    <p>
+      Conformada por los llamados Residuos de Aparatos Electricos y Electronicos (RAEE), 
+      el documento *Una definicion global de E-waste* de la Universidad de la ONU, 
+      la define como residuos resultantes de los aparatos que necesitan energia para funcionar y que, 
+      al ser desechados, contienen una pila o un enchufe. Al estar fabricados con alta tecnologia, 
+      estos residuos contienen sustancias que pueden ser toxicas y tambien metales pesados, 
+      como por ejemplo el plomo, que pueden contaminar el suelo, el agua y los alimentos, 
+      lo que repercute tanto en el medio ambiente como en la salud humana.
+    </p>
+  </div>
+
+  <h1>¿COMO FUNCIONA EL RECICLAJE ELECTRONICO?</h1>
+  <div class="clearfix">
+    <img src="cona1.jpeg" alt="Reciclaje Electronico" class="imagen-circular derecha">
+    <p>
+      El proceso de reciclaje de equipos electronicos, al igual que otras formas de reciclaje, 
+      tiene como objetivo devolver los materiales utilizados a la cadena de produccion. 
+      Sin embargo, preparar los residuos electronicos para su reutilizacion no es tan sencillo como puede serlo el reciclaje de papel o aluminio.
+      "Los residuos electricos y electronicos son muy complejos. Ademas de metales, hay plastico y otros tipos de polimeros mezclados en ese equipo.
+      Es un reciclaje dificil"
+    </p>
+  </div>
+
+  <a href="menu1.html" class="back-button"> Regresar al Menu</a>
+</body>
+</html>

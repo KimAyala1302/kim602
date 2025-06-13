@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Adivina el Dispositivo Electronico</title>
+<style>
+  body {
+    background-color: #282c34;
+    color: #f8f8f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 2rem;
+  }
+  h1 {
+    margin-bottom: 1rem;
+  }
+  .device {
+    font-size: 6rem;
+    margin-bottom: 0.5rem;
+  }
+  .clue {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+  input[type="text"] {
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: none;
+    width: 200px;
+    margin-right: 0.5rem;
+  }
+  button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: none;
+    background-color: #61dafb;
+    color: #282c34;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  button:hover {
+    background-color: #21a1f1;
+  }
+  .result {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+  <h1>Creado por Chavez Ayala Kinverly Joyce</h1>
+  <h1>?? Adivina el Dispositivo Electronico</h1>
+  <div class="device" id="device-emoji">??</div>
+  <div class="clue" id="clue-text">Pista: Es una computadora portátil.</div>
+  <input type="text" id="guess" placeholder="Escribe tu respuesta aquí" autocomplete="off"/>
+  <button onclick="checkAnswer()">Adivinar</button>
+  <div class="result" id="result"></div>
+
+  
+  <br><br>
+  <button onclick="volverAlMenu()">Regresar al Menu Principal</button>
+
+<script>
+  const devices = [
+    { emoji: "??", name: "laptop", clue: "Es una computadora portatil." },
+    { emoji: "??", name: "celular", clue: "Uso personal." },
+    { emoji: "???", name: "impresora", clue: "Dispositivo para imprimir documentos." },
+    { emoji: "??", name: "camara", clue: "Captura fotos y videos." },
+    { emoji: "???", name: "computadora", clue: "Equipo de escritorio para trabajar." }
+  ];
+
+  let currentIndex = 0;
+
+  function loadDevice() {
+    const device = devices[currentIndex];
+    document.getElementById("device-emoji").textContent = device.emoji;
+    document.getElementById("clue-text").textContent = "Pista: " + device.clue;
+    document.getElementById("result").textContent = "";
+    document.getElementById("guess").value = "";
+  }
+
+  function checkAnswer() {
+    const guess = document.getElementById("guess").value.trim().toLowerCase();
+    if (!guess) return;
+
+    const device = devices[currentIndex];
+
+    if (guess === device.name) {
+      document.getElementById("result").textContent = "? ¡Correcto!";
+      currentIndex++;
+      if (currentIndex >= devices.length) {
+        document.getElementById("result").textContent += " ¡Terminaste el juego!";
+        document.getElementById("device-emoji").textContent = "??";
+        document.getElementById("clue-text").textContent = "";
+        document.getElementById("guess").style.display = "none";
+        document.querySelector("button[onclick='checkAnswer()']").style.display = "none";
+      } else {
+        setTimeout(loadDevice, 1500);
+      }
+    } else {
+      document.getElementById("result").textContent = "? Intenta de nuevo.";
+    }
+  }
+
+  function volverAlMenu() {
+    window.location.href = "menu1.html"; // Cambia esta ruta según tu estructura
+  }
+
+  loadDevice();
+</script>
+</body>
+</html>

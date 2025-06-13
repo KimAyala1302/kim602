@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Memorama Informatico</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: magenta;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #fff;
+    }
+
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      gap: 10px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .card {
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .card.flipped img {
+      display: block;
+    }
+
+    .card.matched {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+    #mensaje-final {
+      display: none;
+      margin-top: 30px;
+      font-size: 22px;
+      color: yellow;
+      font-weight: bold;
+      background-color: #000;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 12px 24px;
+      background-color: white;
+      color: magenta;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: deeppink;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Creado por Chavez Ayala Kinverly Joyce</h1>
+  <h1>?? Memorama de Informatica</h1>
+
+  <div class="game-board" id="gameBoard"></div>
+  <div id="mensaje-final">?? ¡Felicidades! Has completado el memorama. ??</div>
+
+ 
+  <a href="menu1.html" class="back-button"> Regresar al Menu</a>
+
+  <script>
+    const imagePairs = [
+      { id: "html", img: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" },
+      { id: "css", img: "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" },
+      { id: "cpu", img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png" },
+      { id: "ram", img: "https://cdn-icons-png.flaticon.com/512/3515/3515787.png" },
+      { id: "js", img: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" },
+      { id: "ssd", img: "https://cdn-icons-png.flaticon.com/512/3524/3524388.png" }
+    ];
+
+    let cards = [];
+
+    imagePairs.forEach(pair => {
+      cards.push({ id: pair.id, img: pair.img });
+      cards.push({ id: pair.id, img: pair.img });
+    });
+
+    cards = cards.sort(() => 0.5 - Math.random());
+
+    const board = document.getElementById("gameBoard");
+    const mensajeFinal = document.getElementById("mensaje-final");
+
+    let firstCard = null;
+    let secondCard = null;
+    let lockBoard = false;
+
+    cards.forEach(cardData => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.dataset.id = cardData.id;
+
+      const img = document.createElement("img");
+      img.src = cardData.img;
+      card.appendChild(img);
+
+      card.addEventListener("click", () => {
+        if (lockBoard || card.classList.contains("flipped") || card.classList.contains("matched")) return;
+
+        card.classList.add("flipped");
+
+        if (!firstCard) {
+          firstCard = card;
+        } else {
+          secondCard = card;
+          lockBoard = true;
+
+          if (firstCard.dataset.id === secondCard.dataset.id) {
+            firstCard.classList.add("matched");
+            secondCard.classList.add("matched");
+            resetBoard();
+            checkWin();
+          } else {
+            setTimeout(() => {
+              firstCard.classList.remove("flipped");
+              secondCard.classList.remove("flipped");
+              resetBoard();
+            }, 1000);
+          }
+        }
+      });
+
+      board.appendChild(card);
+    });
+
+    function resetBoard() {
+      [firstCard, secondCard, lockBoard] = [null, null, false];
+    }
+
+    function checkWin() {
+      const matched = document.querySelectorAll(".card.matched");
+      if (matched.length === cards.length) {
+        mensajeFinal.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
